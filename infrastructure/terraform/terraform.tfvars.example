@@ -1,0 +1,13 @@
+aws_region   = "us-east-1"
+project_name = "ecommerce"
+environment  = "prod"
+
+db_password = "CHANGE_ME_STRONG_PASSWORD"
+jwt_secret  = "CHANGE_ME_LONG_RANDOM_STRING"
+
+# Replace with your account ID & ECR URLs after `terraform apply` once,
+# then re-apply with the real images, or use the GitHub Actions workflow.
+backend_image  = "123456789012.dkr.ecr.us-east-1.amazonaws.com/ecommerce-backend:latest"
+frontend_image = "123456789012.dkr.ecr.us-east-1.amazonaws.com/ecommerce-frontend:latest"
+
+desired_count = 1

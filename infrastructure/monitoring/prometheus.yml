@@ -1,0 +1,23 @@
+# Configuration Prometheus pour scraper le backend ecommerce
+# Usage local : docker run -p 9090:9090 -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: ecommerce
+    env: prod
+
+scrape_configs:
+  - job_name: ecommerce-backend
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['backend:3000']
+        labels:
+          service: backend
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+
+# En production sur ECS, on utilise CloudWatch Container Insights + Managed Service
+# for Prometheus (AMP) qui scrape via aws_prometheus_workspace + ADOT collector.
