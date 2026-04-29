@@ -4,13 +4,38 @@
     "es2022": true,
     "jest": true
   },
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2022,
-    "sourceType": "commonjs"
+    "sourceType": "module"
   },
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-namespace": "off",
     "no-console": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-require-imports": "off",
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["dist/", "coverage/", "node_modules/"]
 }
