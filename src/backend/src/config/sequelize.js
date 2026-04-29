@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const useSSL = (process.env.DB_SSL ?? 'true').toLowerCase() !== 'false';
 const common = {
   username: process.env.DB_USER || 'ecommerce',
   password: process.env.DB_PASSWORD || 'ecommerce',
@@ -8,6 +9,9 @@ const common = {
   port: parseInt(process.env.DB_PORT || '5432', 10),
   dialect: 'postgres',
   logging: false,
+  dialectOptions: useSSL
+    ? { ssl: { require: true, rejectUnauthorized: false } }
+    : {},
 };
 
 module.exports = {

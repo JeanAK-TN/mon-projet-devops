@@ -45,7 +45,7 @@ resource "aws_ecs_task_definition" "backend" {
       { name = "DB_NAME", value = "ecommerce" },
       { name = "DB_USER", value = var.db_username },
       { name = "DB_PASSWORD", value = var.db_password },
-      { name = "DATABASE_URL", value = "postgresql://${var.db_username}:${var.db_password}@${aws_db_instance.main.address}:5432/ecommerce?schema=public" },
+      { name = "DATABASE_URL", value = "postgresql://${var.db_username}:${var.db_password}@${aws_db_instance.main.address}:5432/ecommerce?schema=public&sslmode=require" },
       { name = "JWT_SECRET", value = var.jwt_secret },
       { name = "CORS_ORIGIN", value = "*" }
     ]

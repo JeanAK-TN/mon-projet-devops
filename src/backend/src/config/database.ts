@@ -11,6 +11,7 @@ if (dialect === 'sqlite') {
     logging: false,
   });
 } else {
+  const useSSL = (process.env.DB_SSL ?? 'true').toLowerCase() !== 'false';
   sequelize = new Sequelize(
     process.env.DB_NAME || 'ecommerce',
     process.env.DB_USER || 'ecommerce',
@@ -21,6 +22,9 @@ if (dialect === 'sqlite') {
       dialect: 'postgres',
       logging: false,
       pool: { max: 10, min: 0, acquire: 30000, idle: 10000 },
+      dialectOptions: useSSL
+        ? { ssl: { require: true, rejectUnauthorized: false } }
+        : {},
     }
   );
 }
