@@ -10,7 +10,7 @@ resource "aws_db_instance" "main" {
   allocated_storage       = 20
   storage_type            = "gp3"
   engine                  = "postgres"
-  engine_version          = "15.4"
+  engine_version          = "15.17"
   instance_class          = var.db_instance_class
   db_name                 = "ecommerce"
   username                = var.db_username
